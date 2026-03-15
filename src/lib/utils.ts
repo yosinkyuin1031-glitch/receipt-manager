@@ -36,8 +36,33 @@ export function getMonthName(month: number): string {
 
 // ドキュメントタイプラベル
 export function getDocTypeLabel(type: string): string {
-  return type === 'invoice' ? '請求書' : '領収書';
+  const labels: Record<string, string> = {
+    receipt: 'レシート・領収書',
+    invoice: '請求書',
+    credit_card: 'クレカ明細',
+    bank_statement: '銀行明細',
+  };
+  return labels[type] || 'その他';
 }
+
+// ドキュメントタイプの色
+export function getDocTypeColor(type: string): string {
+  const colors: Record<string, string> = {
+    receipt: 'bg-blue-100 text-blue-700',
+    invoice: 'bg-orange-100 text-orange-700',
+    credit_card: 'bg-purple-100 text-purple-700',
+    bank_statement: 'bg-green-100 text-green-700',
+  };
+  return colors[type] || 'bg-gray-100 text-gray-700';
+}
+
+// 全ドキュメントタイプ
+export const DOC_TYPES = [
+  { value: 'receipt', label: 'レシート・領収書' },
+  { value: 'invoice', label: '請求書' },
+  { value: 'credit_card', label: 'クレジットカード明細' },
+  { value: 'bank_statement', label: '銀行口座明細' },
+];
 
 // カテゴリ一覧
 export const CATEGORIES = [
